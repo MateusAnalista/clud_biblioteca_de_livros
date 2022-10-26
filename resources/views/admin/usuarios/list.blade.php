@@ -6,11 +6,12 @@
 @stop
 
 @section('content')
+
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Livros Cadastrados</h3>
+                    <h3 class="card-title">Lista de Usuarios</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -23,22 +24,24 @@
                     </div>
                 </div>
 
-                <div class="card-body table-responsive p-0" style="height: 300px;">
-                    <table class="table table-head-fixed text-nowrap">
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
-                                <th>Titulo Livro</th>
-                                <th>Plano</th>
-                                <th>Editora</th>
+                                <th>Usuario</th>
+                                <th>Permissão</th>
+                                <th>Nome</th>
+                                <th>Email</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($livros as $key => $livro)
+                            @foreach ($usuarios as $key => $usuario)
                                 <tr>
-                                    <td>{{ $livro->titulo }}</td>
-                                    <td>{{ $livro->role }}</td>
-                                    <td>{{ $livro->editora }}</td>
+                                    <td>{{ $usuario->id }}</td>
+                                    <td>{{ $usuario->role }}</td>
+                                    <td>{{ $usuario->name }}</td>
+                                    <td>{{ $usuario->email }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger dropdown-toggle"
@@ -46,8 +49,8 @@
                                                 Action
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Atualizar</a>
-                                                <a class="dropdown-item" href="{{ route('admin.livros.delete',[$livro->id]) }}">Deletar</a>
+                                                <a class="dropdown-item" href="{{ route('admin.usuarios.edit',[$usuario->id]) }}">Editar</a>
+                                                <a class="dropdown-item" href="{{ route('admin.usuarios.delete',[$usuario->id]) }}">Deletar</a>
                                             </div>
                                         </div>
                                     </td>
@@ -61,8 +64,6 @@
 
         </div>
     </div>
-
-
 
 @stop
 

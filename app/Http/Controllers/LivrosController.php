@@ -16,13 +16,9 @@ class LivrosController extends Controller
      */
     public function index()
     {
-        // dd('mateus');
-        $livro = Livros::all();
-
-        dd($livro);
-
-
-        return view('admin.livros.list');
+        $livros = Livros::all();
+        // dd($livros);
+        return view('admin.livros.list', compact('livros'));
     }
 
     /**
@@ -33,7 +29,6 @@ class LivrosController extends Controller
     public function create()
     {
         $generos = Generos::all()->pluck('titulo', 'id')->toArray();
-       
         return view('admin.livros.create',compact('generos'));
     }
 
@@ -84,7 +79,7 @@ class LivrosController extends Controller
      * @param  \App\Models\Livros  $livros
      * @return \Illuminate\Http\Response
      */
-    public function show(Livros $livros)
+    public function show(Livros $livro)
     {
         //
     }
@@ -95,9 +90,9 @@ class LivrosController extends Controller
      * @param  \App\Models\Livros  $livros
      * @return \Illuminate\Http\Response
      */
-    public function edit(Livros $livros)
+    public function edit(Livros $livro)
     {
-        //
+        //2
     }
 
     /**
@@ -107,7 +102,7 @@ class LivrosController extends Controller
      * @param  \App\Models\Livros  $livros
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLivrosRequest $request, Livros $livros)
+    public function update(StoreLivrosRequest $request, Livros $livro)
     {
         //
     }
@@ -118,8 +113,9 @@ class LivrosController extends Controller
      * @param  \App\Models\Livros  $livros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Livros $livros)
+    public function destroy(Livros $livro)
     {
-        //
+        $livro->delete();
+        return redirect()->route('admin.livros.list');
     }
 }

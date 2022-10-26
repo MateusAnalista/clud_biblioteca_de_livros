@@ -64,10 +64,4 @@ class StoreLivrosRequest extends FormRequest
         $data['user_id'] = Auth::user()->id;
         $this->merge($data);
     }
-
-    // protected function failedValidation(Validator $validator)
-    // {
-    //     $errors = $validator->errors();
-    //     return redirect()->back()->with('message', 'IT NOT WORKS!');
-    // }
 }
