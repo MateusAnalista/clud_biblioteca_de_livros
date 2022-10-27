@@ -13,10 +13,10 @@
                 </div>
                 <p>{{ $livro->descricao }}</p>
                 <div class="d-flex">
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    <a href="{{ route('home.reservar', [$livro->id]) }}" class="btn btn-outline-dark flex-shrink-0">
                         <i class="bi-cart-fill me-1"></i>
                         Fazer Reserva
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

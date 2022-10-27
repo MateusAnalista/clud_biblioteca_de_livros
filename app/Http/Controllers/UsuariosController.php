@@ -111,4 +111,9 @@ class UsuariosController extends Controller
         $user->delete(); // AQUI ELE PEGA O USUARIO DO BANCO E JA FAZ O DELETE 
         return redirect()->route('admin.usuarios.list'); // AQUI ELE ME RETORNA PARA LISTAS DE USUARIOS APOS DELETAR
     }
+
+    public function admin()
+    {
+        return view('admin.admin');
+    }
 }

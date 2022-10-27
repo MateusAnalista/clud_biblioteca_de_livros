@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livros;
+use App\Models\Reservas;
 use App\Models\user;
 use Response;
 use Auth;
@@ -51,6 +52,32 @@ class HomeController extends Controller
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="'.$filename.'"'
         ]);
+    }
+
+    public function reservarLivro($livro)
+    {
+        $reserva = new Reservas;
+        $reserva->livros_id = $livro;
+        $reserva->user_id = Auth::user()->id;
+        $reserva->retirada = date('Y-m-d');
+        $reserva->save();
+
+        return redirect()->route('home.minhas.reservas')->with('message', 'O livro foi reservado com sucesso!');
+    }
+
+    public function minhasReservas()
+    {
+        $reservas = Reservas::where('user_id', Auth::user()->id)->whereNull('devolucao')->get();
+        return view('reservas',  compact('reservas'));
+    }
+
+
+    public function devolverLivro(Reservas $reserva)
+    {
+        $reserva->devolucao = date('Y-m-d');
+        $reserva->save();
+
+        return redirect()->back()->with('message', 'O livro foi devolvido com sucesso!');
     }
 
 }

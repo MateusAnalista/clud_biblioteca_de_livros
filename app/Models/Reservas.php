@@ -29,4 +29,9 @@ class Reservas extends Model
         'updated_at',
     ];
 
+    public function Livro()
+    {
+        return $this->belongsTo(Livros::class, 'livros_id', 'id');
+    }
+
 }

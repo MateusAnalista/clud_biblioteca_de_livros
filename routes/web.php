@@ -27,17 +27,18 @@ Auth::routes();
 //     return view("planos");
 // });
 Route::get("/", [HomeController::class, "index"])->name("home.index");
-Route::get("/planos", [HomeController::class, "planos"])->name("home.planos");
-Route::get("/mudar/plano/{role}", [HomeController::class, "mudarPlano"])->name("home.mudar.plano");
-
-Route::get("/livro/{livro}", [HomeController::class, "livro"])->name("home.livro");  // ESSE EU IREI FAZER AGORA 
-
+Route::get("/planos", [HomeController::class, "planos"])->middleware(["auth"])->name("home.planos");
+Route::get("/mudar/plano/{role}", [HomeController::class, "mudarPlano"])->middleware(["auth"])->name("home.mudar.plano");
+Route::get("/livro/{livro}", [HomeController::class, "livro"])->middleware(["auth"])->name("home.livro");  // ESSE EU IREI FAZER AGORA 
 Route::get("/ler/{livro}", [HomeController::class, "showPdf"])->middleware(["auth"])->name("home.showPdf");
-
+Route::get("/reservar/{livro}", [HomeController::class, "reservarLivro"])->middleware(["auth"])->name("home.reservar");
+Route::get("/devolver/{reserva}", [HomeController::class, "devolverLivro"])->middleware(["auth"])->name("home.devolver");
+Route::get("/minhas/reservas", [HomeController::class, "minhasReservas"])->middleware(['auth'])->name("home.minhas.reservas");
 
 Route::prefix("admin")
-    ->middleware(["auth"])
+    ->middleware(["auth", "roles:admin"])
     ->group(function(){
+        Route::get('/', [UsuariosController::class, "admin"])->name("admin");
         Route::prefix("usuarios")
             ->group(function(){
             Route::get("list", [UsuariosController::class, "index"])->name("admin.usuarios.list");

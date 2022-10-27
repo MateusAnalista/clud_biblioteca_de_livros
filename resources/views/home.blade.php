@@ -8,7 +8,7 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 bt">
                 <h2 class="text-center">Livros Plano Gratis</h2>
             </div>
             <div class="col-md-12">
@@ -22,7 +22,7 @@
                                     <a href="{{ route('login') }}" class="btn black">Entre para ver</a>
                                 @endguest
                                 @auth
-                                    <a href="{{ route('home.livro', [$free->id]) }}" class="btn black">Ver livro</a>
+                                    <a href="{{ route('home.livro', [$free->id]) }}" class="btn black">Ver Livro</a>
                                 @endauth
                             </div>
                         </div>
