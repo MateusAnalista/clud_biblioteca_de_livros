@@ -46,7 +46,7 @@
                                                 Action
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Atualizar</a>
+                                                <a class="dropdown-item" href="{{ route('admin.livros.edit',[$livro->id]) }}">Atualizar</a>
                                                 <a class="dropdown-item" href="{{ route('admin.livros.delete',[$livro->id]) }}">Deletar</a>
                                             </div>
                                         </div>

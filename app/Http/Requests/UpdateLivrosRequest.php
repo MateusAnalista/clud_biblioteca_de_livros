@@ -24,7 +24,34 @@ class UpdateLivrosRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'titulo' => 'required|min:3|max:255',
+            'role' => 'required',
+            'editora' => 'required|min:3|max:255',
+            'genero_id' => 'required|exists:generos,id',
+            'descricao' => 'required|min:3',
+            'imagem' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
+            'pdf' => 'required|mimes:pdf|max:10000'
+        ];
+    }
+    
+    public function messages()
+    {
+        return [
+            'titulo.required' => 'Este campo é obrigatório',
+            'titulo.min' => 'Minimo 3 caracteres',
+            'titulo.max' => 'Maximo 255 caracteres',
+            'role.required'  => 'Este campo é obrigatório',
+            'editora.required' => 'Este campo é obrigatório',
+            'editora.min' => 'Minimo 3 caracteres',
+            'editora.max' => 'Minimo 255 caracteres',
+            'descricao.required' => 'Este campo é obrigatório',
+            'descricao.min' => 'Minimo 3 caracteres',
+            'imagem.required' => 'Este campo é obrigatório',
+            'imagem.mimes' => 'Envie imagens dos tipos : png,jpg,jpeg,gif',
+            'imagem.max' => 'O tamanho maximo deve ser de 10MB',
+            'pdf.required' => 'Este campo é obrigatório',
+            'pdf.mimes' => 'Envie um arquivo tipo pdf',
+            'pdf.max' => 'O tamanho deve ser de no maximo 2048MB'
         ];
     }
 }

@@ -84,6 +84,30 @@ class LivrosController extends Controller
         //
     }
 
+
+    /**
+     * funcão deletar imagem do livro.
+     *
+     * @param  \App\Models\Livros  $livros
+     * @return \Illuminate\Http\Response
+    */
+    public function deletarImagemLivros ()
+    {
+
+    }
+
+    /**
+     * funcão deletar pdf do livro.
+     *
+     * @param  \App\Models\Livros  $livros
+     * @return \Illuminate\Http\Response
+    */
+    public function deletarPdfLivros ()
+    {
+
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -92,7 +116,8 @@ class LivrosController extends Controller
      */
     public function edit(Livros $livro)
     {
-        //2
+        return view('admin.livros.update', compact('livro'));
+
     }
 
     /**
@@ -102,9 +127,9 @@ class LivrosController extends Controller
      * @param  \App\Models\Livros  $livros
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreLivrosRequest $request, Livros $livro)
+    public function update(UpdateLivrosRequest $request, Livros $livro)
     {
-        //
+        dd($livro->all());
     }
 
     /**

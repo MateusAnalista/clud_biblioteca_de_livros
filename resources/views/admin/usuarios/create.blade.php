@@ -8,7 +8,7 @@
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title"> Cadastro de usuarios</h3>
+            <h3 class="card-title">Cadastro de usuarios</h3>
         </div>
         <form pb-autologin="true" autocomplete="off" method="POST" action="{{ route('admin.usuarios.store') }}" enctype="multipart/form-data">
             @csrf

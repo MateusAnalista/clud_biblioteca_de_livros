@@ -32,5 +32,10 @@ class Livros extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function genero()
+    {
+        return $this->belongsTo(Generos::class, 'genero_id', 'id');
+    }
     
 }
