@@ -6,6 +6,8 @@ use App\Http\Requests\StoreLivrosRequest;
 use App\Http\Requests\UpdateLivrosRequest;
 use App\Models\Generos;
 use App\Models\Livros;
+use Exception;
+
 
 class LivrosController extends Controller
 {
@@ -107,7 +109,6 @@ class LivrosController extends Controller
 
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -116,8 +117,9 @@ class LivrosController extends Controller
      */
     public function edit(Livros $livro)
     {
-        return view('admin.livros.update', compact('livro'));
-
+        $generos = Generos::all()->pluck('titulo', 'id')->toArray();
+        return view('admin.livros.update', compact('livro', 'generos'));
+    
     }
 
     /**
@@ -129,7 +131,35 @@ class LivrosController extends Controller
      */
     public function update(UpdateLivrosRequest $request, Livros $livro)
     {
-        dd($livro->all());
+        $livro->role = $request->role;
+        $livro->titulo = $request->titulo;
+        $livro->editora = $request->editora;
+        $livro->genero_id = $request->genero_id;
+        $livro->user_id = $request->user_id;
+        $livro->descricao = $request->descricao;
+
+        //upload the image file
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()):
+            $requestImagem = $request->imagem;
+            $extension = $requestImagem->extension();
+            $imagemName = md5($requestImagem->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $requestImagem->move(public_path('img/livros'), $imagemName); 
+            $livro->imagem = $imagemName;
+        endif;
+        
+        //upload the pdf file
+        if($request->hasFile('pdf') && $request->file('pdf')->isValid()):
+            $requestPdf = $request->pdf;
+            $extension = $requestPdf->extension();
+            $pdfName = md5($requestPdf->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $requestPdf->move(public_path('img/livros'), $pdfName); 
+            $livro->pdf = $pdfName;
+        endif;
+
+       $livro->save();
+        
+       return redirect()->route('admin.livros.list');
+        
     }
 
     /**
@@ -142,5 +172,15 @@ class LivrosController extends Controller
     {
         $livro->delete();
         return redirect()->route('admin.livros.list');
+    }
+
+
+    public function deleltarFiles($type, Livros $livro)
+    {
+        unlink(public_path('img/livros/').$livro->{$type});
+        $livro->{$type} = null;
+        $livro->save();
+
+        return redirect()->back();
     }
 }

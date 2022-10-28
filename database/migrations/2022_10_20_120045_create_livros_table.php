@@ -23,8 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('descricao');
-            $table->string('imagem');
-            $table->string('pdf');
+            $table->string('imagem')->nullable();
+            $table->string('pdf')->nullable();
             $table->timestamps();
         });
     }

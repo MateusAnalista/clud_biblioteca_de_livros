@@ -16,6 +16,10 @@ class ReservasController extends Controller
     public function index()
     {
         //
+
+        $reservas = Reservas::whereNull('devolucao')->get();
+
+        return view('admin.reservas.list', compact('reservas'));
     }
 
     /**

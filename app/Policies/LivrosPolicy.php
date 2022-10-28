@@ -30,7 +30,7 @@ class LivrosPolicy
      */
     public function view(User $user, Livros $livros)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class LivrosPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class LivrosPolicy
      */
     public function update(User $user, Livros $livros)
     {
-        //
+        return true;
     }
 
     /**

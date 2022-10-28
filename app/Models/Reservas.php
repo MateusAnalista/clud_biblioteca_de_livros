@@ -27,11 +27,17 @@ class Reservas extends Model
     protected $dates = [
         'created_at',
         'updated_at',
+        'retirada',
     ];
 
     public function Livro()
     {
         return $this->belongsTo(Livros::class, 'livros_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 }

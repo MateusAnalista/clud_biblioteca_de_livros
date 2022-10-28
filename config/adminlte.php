@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>LIVRARIA DIGITAL</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'img/interno/logo-livraria-digital.svg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,11 +86,11 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'img/interno/logo-livraria-digital.svg',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 200,
+            'height' => 200,
         ],
     ],
 
@@ -109,11 +109,11 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'img/interno/logo-livraria-digital.svg',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 200,
+            'height' => 200,
         ],
     ],
 
@@ -311,15 +311,8 @@ return [
                     'icon'        => 'far fa-fw fa-file',
                     'label_color' => 'success',
                 ],
-                [
-                    'text'    => 'Editar usuário',
-                    'url'         => 'admin/usuarios/edit',
-                    'icon'        => 'far fa-fw fa-file',
-                    'label_color' => 'success',
-                ],
             ]
         ],
-
         [
             'text'        => 'Livros',
             'icon'        => 'far fa-fw fa-file',
@@ -332,12 +325,6 @@ return [
                     'label_color' => 'success',
                 ],
                 [
-                    'text'    => 'Editar um Livro',
-                    'url'         => 'admin/livros/edit',
-                    'icon'        => 'far fa-fw fa-file',
-                    'label_color' => 'success',
-                ],
-                [
                     'text'    => 'Listar Livros',
                     'url'         => 'admin/livros/list',
                     'icon'        => 'far fa-fw fa-file',
@@ -345,7 +332,19 @@ return [
                 ],
             ]
         ],
-        
+        [
+            'text'        => 'Livros Reservados',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text'    => 'Listar Livros Reservados',
+                    'url'         => 'admin/reservas/list',
+                    'icon'        => 'far fa-fw fa-file',
+                    'label_color' => 'success',
+                ],
+            ]
+        ],
     ],
 
     /*

@@ -80,4 +80,15 @@ class HomeController extends Controller
         return redirect()->back()->with('message', 'O livro foi devolvido com sucesso!');
     }
 
+    public function reserveList(Reservas $reservas)
+    {
+        $reservas->all();
+        
+        return view('reservas',  compact('reservas'));
+        dd($reservas);
+
+
+    }
+
+
 }

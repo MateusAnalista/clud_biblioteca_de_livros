@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class UpdateLivrosRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateLivrosRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,8 +30,8 @@ class UpdateLivrosRequest extends FormRequest
             'editora' => 'required|min:3|max:255',
             'genero_id' => 'required|exists:generos,id',
             'descricao' => 'required|min:3',
-            'imagem' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
-            'pdf' => 'required|mimes:pdf|max:10000'
+            'imagem' => 'sometimes|required|mimes:png,jpg,jpeg,gif|max:10000',
+            'pdf' => 'sometimes|required|mimes:pdf|max:10000'
         ];
     }
     
@@ -53,5 +54,11 @@ class UpdateLivrosRequest extends FormRequest
             'pdf.mimes' => 'Envie um arquivo tipo pdf',
             'pdf.max' => 'O tamanho deve ser de no maximo 2048MB'
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $data['user_id'] = Auth::user()->id;
+        $this->merge($data);
     }
 }

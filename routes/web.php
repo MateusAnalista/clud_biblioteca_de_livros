@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ReservasController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -54,9 +55,13 @@ Route::prefix("admin")
                 Route::get("create", [LivrosController::class, "create"])->name("admin.livros.create");
                 Route::post("create", [LivrosController::class, "store"])->name("admin.livros.store");
                 Route::get("edit/{livro}", [LivrosController::class, "edit"])->name("admin.livros.edit");
-
-                Route::post("edit/{livro}", [LivrosController::class, "update"])->name("admin.livros.update"); // AQUI UPDATE LIVROS
-
+                Route::post("update/{livro}", [LivrosController::class, "update"])->name("admin.livros.update");
+                Route::get('/deletar/files/{type}/{livro}', [LivrosController::class, "deleltarFiles"])->name("admin.livros.delete.image");
                 Route::get("delete/{livro}", [LivrosController::class, "destroy"])->name("admin.livros.delete");
             });
+        Route::prefix("reservas")
+            ->group(function() {
+                Route::get("list", [ReservasController::class, "index"])->name("admin.reservas.list");
+            });
+    
     });
